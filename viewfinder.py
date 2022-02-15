@@ -5,16 +5,11 @@ import sys
 
 count = 0
 
-# if len(sys.argv) == 3:
-#     count = int(sys.argv[2])
-# file_name = sys.argv[1]
+if len(sys.argv) == 3:
+    count = int(sys.argv[2])
+file_name = sys.argv[1]
 
-# print(len(sys.argv))
-
-# with open(''+file_name) as f:
-#     data = json.load(f)
-
-with open("mesh_x_sin_cos_10000.json") as f:
+with open(''+file_name) as f:
     data = json.load(f)
 
 candidates = data['elements']
@@ -52,7 +47,7 @@ def isVertex(triangle, neighbours):
         removeElements([item['id'] for item in neighbours])
         return {'isVertex': True, 'value': neighbours[-1]['value']}
     else:
-        removeElements([item['id'] for item in neighbours[:-1] if item['value'] < triangleValue])
+        removeElements([item['id'] for item in neighbours[:-1] if item['value'] <= triangleValue])
         return {'isVertex': False, 'value': neighbours[-1]['value']}
 
 
